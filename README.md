@@ -38,6 +38,18 @@ for (let i = 0; i < 50; i++) {
 }
 ```
 
+## build
+
+```sh
+yarn build
+```
+
+or:
+
+```sh
+npm run build
+```
+
 ## test
 
 ```sh
@@ -48,6 +60,12 @@ or:
 
 ```sh
 npm test
+```
+
+Note: to publish artifacts to **NPM**, run:
+
+```sh
+npm publish
 ```
 
 ## lint
