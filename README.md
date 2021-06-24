@@ -87,4 +87,4 @@ If you can contribute or you want to, feel free to do it at [__Buy me a coffee! 
 
 :blush:
 
-### Be careful and donate just if it is within your possibilities, because there is no refund system. And remember that you don't need to donate, it is just a free choice for you. Thank you!
+**Be careful and donate just if it is within your possibilities, because there is no refund system. And remember that you don't need to donate, it is just a free choice for you. Thank you!**
