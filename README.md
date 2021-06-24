@@ -56,6 +56,8 @@ npm test
 yarn lint
 ```
 
+or:
+
 ```sh
 npm run lint
 ```
