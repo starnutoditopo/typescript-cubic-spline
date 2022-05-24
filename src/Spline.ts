@@ -4,6 +4,19 @@ class Spline {
   ks: Float64Array;
 
   constructor(xs: number[], ys: number[]) {
+    if (xs.length !== ys.length) {
+      throw Error("Input arrays must be of same size.");
+    }
+
+    if (
+      xs.every((e, i) => {
+        if (i) return e > xs[i - 1];
+        else return true;
+      }) === false
+    ) {
+      throw Error("xs must increase monotonically.");
+    }
+
     this.xs = xs;
     this.ys = ys;
     this.ks = this.getNaturalKs(new Float64Array(this.xs.length));
@@ -67,6 +80,14 @@ class Spline {
   }
 
   at(x: number): number {
+    if (x <= this.xs[0]) {
+      return this.ys[0];
+    }
+
+    if (x >= this.xs[this.xs.length - 1]) {
+      return this.ys[this.ys.length - 1];
+    }
+
     let i = this.getIndexBefore(x);
     const t = (x - this.xs[i - 1]) / (this.xs[i] - this.xs[i - 1]);
     const a =

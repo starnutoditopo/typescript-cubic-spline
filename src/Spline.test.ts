@@ -19,6 +19,79 @@ describe("spline", function () {
   });
 });
 
+describe("spline edge cases", function () {
+  it("arrays must be of same size", () => {
+    const xs = [1, 2, 3, 4, 5];
+    const ys = [9, 3, 6, 2];
+
+    const shouldThrow = () => {
+      new Spline(xs, ys);
+    };
+
+    expect(shouldThrow).toThrow("Input arrays must be of same size.");
+  });
+
+  it("empty input is not allowed", () => {
+    const xs: number[] = [];
+    const ys: number[] = [];
+
+    const shouldThrow = () => {
+      new Spline(xs, ys);
+    };
+
+    expect(shouldThrow).toThrow();
+  });
+
+  it("empty input is not allowed", () => {
+    const xs = [1];
+    const ys = [1];
+
+    const spline = new Spline(xs, ys);
+    console.log(spline.at(1));
+  });
+
+  it("arrays must be of same size", () => {
+    const xs = [1, 2, 3, 4, 3.5];
+    const ys = [9, 3, 6, 2, 5];
+
+    const shouldThrow = () => {
+      new Spline(xs, ys);
+    };
+
+    expect(shouldThrow).toThrow("xs must increase monotonically.");
+  });
+
+  it("array of size 1 works", () => {
+    const xs = [4];
+    const ys = [4];
+
+    const spline = new Spline(xs, ys);
+    expect(spline.at(1.4)).toBe(4);
+    expect(spline.at(4)).toBe(4);
+    expect(spline.at(8)).toBe(4);
+  });
+
+  it("linear interpolation when using lenght of 2", () => {
+    const xs = [3, 4];
+    const ys = [0, 10];
+
+    const spline = new Spline(xs, ys);
+    expect(spline.at(3.5)).toBe(5);
+  });
+
+  it("no errors when querying outside of bounds", () => {
+    const xs = [3, 4, 5];
+    const ys = [3, 4, 5];
+
+    const spline = new Spline(xs, ys);
+    expect(spline.at(3)).toBe(3);
+    expect(spline.at(4)).toBe(4);
+
+    expect(spline.at(1)).toBe(3);
+    expect(spline.at(6)).toBe(5);
+  });
+});
+
 describe("speed", function () {
   it("should run quickly on relatively large data, too", () => {
     let arraySizes = [10, 100, 1000, 2000, 4000];
