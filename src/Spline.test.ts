@@ -89,6 +89,26 @@ describe("spline edge cases", function () {
 
     expect(spline.at(1)).toBe(3);
     expect(spline.at(6)).toBe(5);
+
+    // Check for https://github.com/starnutoditopo/typescript-cubic-spline/issues/2
+    expect(spline.at(5.5)).toBe(5);
+  });
+
+  // See https://github.com/starnutoditopo/typescript-cubic-spline/issues/2
+  it("no errors when querying outside of bounds (see https://github.com/starnutoditopo/typescript-cubic-spline/issues/2)", () => {
+    const xs = [1, 2, 3, 4, 5];
+    const ys = [9, 3, 6, 2, 4];
+
+    // new a Spline object
+    const spline = new Spline(xs, ys);
+
+    // This returns is ok
+    console.log(spline.at(-100)); 
+    expect(spline.at(-100)).toBe(9);
+
+    // This returns NaN
+    console.log(spline.at(5.5)); 
+    expect(spline.at(5.5)).toBe(4);
   });
 });
 
